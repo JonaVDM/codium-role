@@ -1,2 +1,33 @@
 ---
-# tasks file for codium-role
+- name: Check the current files
+  ansible.builtin.command: ls -F "{{ item }}"
+  register: existing_dotfile_info
+  failed_when: false
+  check_mode: false
+  changed_when: false
+  with_items: "{{ codium_user_config_files }}"
+
+- name: Remove current files
+  ansible.builtin.file:
+    path: "{{ codium_user_config_files[item.0] }}"
+    state: absent
+  when: "'@' not in item.1.stdout"
+  with_indexed_items: "{{ existing_dotfile_info.results }}"
+
+- name: Link user settings
+  ansible.builtin.file:
+    src: "{{ dotfiles_settings_location }}"
+    dest: "{{ codium_user_config_location }}/settings.json"
+    state: link
+
+- name: Link user snippets
+  ansible.builtin.file:
+    src: "{{ dotfiles_snippets_location }}"
+    dest: "{{ codium_user_config_location }}/snippets"
+    state: link
+
+- name: Install codium extensions
+  ansible.builtin.command: >
+    codium --install-extension {{ item }}
+    creates=~/.vscode-oss/extensions/{{ item }}-*
+  with_items: "{{ codium_install_packages }}"

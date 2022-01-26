@@ -4,6 +4,10 @@
 codium_user_config_location: >
   "{{ (ansible_distribution == 'MacOSX') | ternary('{{ ansible_user_dir }}/Application Support/VSCodium/User', '{{ ansible_user_dir }}/.config/VSCodium/User') }}"
 
+codium_user_config_files:
+  - "{{ codium_user_config_location }}/settings.json"
+  - "{{ codium_user_config_location }}/snippets"
+
 codium_install_packages:
   - angular.ng-template
   - redhat.ansible
