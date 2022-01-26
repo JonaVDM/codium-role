@@ -1,2 +1,36 @@
 ---
 # defaults file for codium-role
+
+codium_user_config_location: >
+  "{{ (ansible_distribution == 'MacOSX') | ternary('{{ ansible_user_dir }}/Application Support/VSCodium/User', '{{ ansible_user_dir }}/.config/VSCodium/User') }}"
+
+codium_install_packages:
+  - angular.ng-template
+  - redhat.ansible
+  - hookyqr.beautify
+  - aaron-bond.better-comments
+  - bungcip.better-toml
+  - dart-code.dart-code
+  - rid9.datetime
+  - ms-azuretools.vscode-docker
+  - mikestead.dotenv
+  - editorconfig.editorconfig
+  - dbaeumer.vscode-eslint
+  - dart-code.flutter
+  - mhutchie.git-graph
+  - eamodio.gitlens
+  - golang.go
+  - pkief.material-icon-theme
+  - arcticicestudio.nord-visual-studio-code
+  - esbenp.prettier-vscode
+  - jeroen-meijer.pubspec-assist
+  - ms-python.python
+  - mechatroner.rainbow-csv
+  - humao.rest-client
+  - matklad.rust-analyzer
+  - ban.spellright
+  - bradlc.vscode-tailwindcss
+  - shyykoserhiy.vscode-spotify
+
+dotfiles_settings_location: ~/.dotfiles/codium/settings.json
+dotfiles_snippets_location: ~/.dotfiles/codium/snippets

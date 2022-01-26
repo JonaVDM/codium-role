@@ -8,7 +8,33 @@ You need to have vscodium installed, you can get it through your package manager
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yml
+codium_user_config_location: "{{ ansible_user_dir }}/Application Support/VSCodium/User"
+```
+
+The directory where the user data is stored, grabs the path which is relevant to the platform (MacOSX - Linux).
+
+```yml
+codium_install_packages:
+  - angular.ng-template
+  - redhat.ansible
+  - hookyqr.beautify
+  - ...
+```
+
+The packages that will be installed by default.
+
+```yml
+dotfiles_settings_location: ~/.dotfiles/codium/settings.json
+```
+
+The location of where the user's settings are stored.
+
+```yml
+dotfiles_snippets_location: ~/.dotfiles/codium/snippets
+```
+
+The location of where the user's snippets are stored.
 
 ## Dependencies
 
@@ -16,11 +42,15 @@ None
 
 ## Example Playbook
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yml
+- hosts: all
+  roles:
+    - role: jonavdm.codium
+      codium_user_config_location: >
+        "{{ ansible_user_dir }}/Application Support/VSCodium/User"
+      dotfiles_settings_location: ~/.dotfiles/codium/settings.json
+      dotfiles_snippets_location: ~/.dotfiles/codium/snippets
+```
 
 ## License
 

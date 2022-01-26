@@ -1,2 +1,5 @@
 ---
 # vars file for codium-role
+codium_install_packages:
+dotfiles_settings_location:
+dotfiles_snippets_location:
