@@ -1,8 +1,7 @@
 ---
 # defaults file for codium-role
 
-codium_user_config_location: >
-  "{{ (ansible_distribution == 'MacOSX') | ternary('{{ ansible_user_dir }}/Library/Application Support/VSCodium/User', '{{ ansible_user_dir }}/.config/VSCodium/User') }}"
+codium_user_config_location: "{{ ansible_user_dir }}/{{ (ansible_distribution == 'MacOSX') | ternary('Library/Application Support/VSCodium/User', '.config/VSCodium/User') }}"
 
 codium_user_config_files:
   - "{{ codium_user_config_location }}/settings.json"
@@ -35,6 +34,9 @@ codium_install_packages:
   - ban.spellright
   - bradlc.vscode-tailwindcss
   - shyykoserhiy.vscode-spotify
+  - rebornix.ruby
+  - castwide.solargraph
+  - kaiwood.endwise
 
 dotfiles_settings_location: ~/.dotfiles/codium/settings.json
 dotfiles_snippets_location: ~/.dotfiles/codium/snippets
